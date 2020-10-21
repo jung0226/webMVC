@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 
 <meta name="viewport" content="width=device, initial-scale=1"/>
-<link rel="stylesheet" href="/webJSP/etc/bootstrap.css">
+<link rel="stylesheet" href="/webMVC/library/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/webJSP/etc/bootstrap.js"></script>
+<script src="/webMVC/library/bootstrap.js"></script>
 <style>
 	#content li{
 		float:left;
@@ -24,6 +24,23 @@
 		text-align:center;
 	}
 </style>
+<script>
+	$(function(){
+		//아이디 중복검사
+		$('#idChk').on('click', function(){
+			window.open('<%=request.getContextPath()%>/register/idSearch.do?userid='+$("#userid").val(),"idCheck",'width=450px,height=300px');
+		});
+		
+		//아이디가 변경 -> 키보드를 입력하면
+		$("#userid").keyup(function(){
+			$("#idStatus").val("N");
+		});
+		//우편변호 검색
+		$('#zipcodeSearch').click(function(){
+			window.open('/webMVC/register/zipSearch.do','zipcode','width=500,height=600');
+		});
+	});
+</script>
 </head>
 <body>
 <div class="container">
@@ -35,7 +52,8 @@
 			<li>아이디</li>
 			<!-- 아이디 중복검사 -->
 			<li><input type="text" name="userid" id="userid" placeholder="아이디 입력"/>
-				<input type="button" value="아이디 중복 검사"/>
+				<input type="button" value="아이디 중복 검사" id="idChk"/>
+				<input type="hidden" name="idStatus" id="idStatus" value="N"/>
 			</li>
 			<li>비밀번호</li>
 			<li><input type="password" name="userpwd" id="userpwd"/></li>
@@ -88,7 +106,7 @@
 			<li><input type="text" name="email" id="email" size="20"/></li>
 			<li>우편번호</li>
 			<li><input type="text" name="zipcode" id="zipcode" size="5"/>
-				<input type="button" value="우편번호검색"/>
+				<input type="button" value="우편번호검색" id="zipcodeSearch"/>
 				<input type="text" name="addr" id="addr" size="40"/>
 			</li>
 			<li>상세 주소</li>

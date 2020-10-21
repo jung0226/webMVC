@@ -13,7 +13,7 @@
 <div id="topMenu">
 	<a href="<%=request.getContextPath() %>/index.do">홈</a>
 	로그인
-	<a href="<%=request.getContextPath() %>/rgister/regFrom.do">회원가입</a>
+	<a href="<%=request.getContextPath() %>/register/regFrom.do">회원가입</a>
 	아이디찾기
 	비밀번호 찾기
 	

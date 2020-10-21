@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 
 <meta name="viewport" content="width=device, initial-scale=1"/>
-<link rel="stylesheet" href="/webJSP/etc/bootstrap.css">
+<link rel="stylesheet" href="/webMVC/library/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/webJSP/etc/bootstrap.js"></script>
+<script src="/webMVC/library/bootstrap.js"></script>
 
 </head>
 <body>

@@ -7,4 +7,6 @@ public interface RegisterInterface {
 	public int registerInsert(RegisterVO vo);
 	//회원정보 수정
 	public void registerSelect(RegisterVO vo);
+	//아이디 중복검사
+	public int idSearch(String userid);
 }
