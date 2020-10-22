@@ -7,7 +7,8 @@ public class RegisterVO {
 	private String username;
 	private String gender;
 	//생년월일
-	private String birth;
+	private String birth;//2020-10-22
+	
 	private String year;
 	private String month;
 	private String day;
@@ -18,13 +19,16 @@ public class RegisterVO {
 	private String tel3;
 	
 	private String email;
-	
+	//주소
 	private String zipcode;
 	private String addr;
 	private String addrDetail;
 	
 	private String regdate;
-
+	
+	//로그인 결과 저장할 변수	Y:로그인, N:로그인 안 됨
+	private String logStatus="N";
+	
 	public int getNo() {
 		return no;
 	}
@@ -66,6 +70,7 @@ public class RegisterVO {
 	}
 
 	public String getBirth() {
+		birth= year+"-"+month+"-"+day;
 		return birth;
 	}
 
@@ -98,6 +103,7 @@ public class RegisterVO {
 	}
 
 	public String getTel() {
+		tel = tel1+"-"+tel2+"-"+tel3;
 		return tel;
 	}
 
@@ -168,7 +174,15 @@ public class RegisterVO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	
+
+	public String getLogStatus() {
+		return logStatus;
+	}
+
+	public void setLogStatus(String logStatus) {
+		this.logStatus = logStatus;
+	}
+
 	
 	
 }

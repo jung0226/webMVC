@@ -12,6 +12,7 @@ public class CommandIdCheck implements CommandService {
 
 	@Override
 	public String executeCommand(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		//폼에 입력된 아이디를 DB조회한다.
 		String userid = req.getParameter("userid");
 		

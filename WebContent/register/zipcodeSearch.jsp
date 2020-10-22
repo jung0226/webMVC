@@ -34,6 +34,16 @@
 			}
 			return false;
 		});
+		//우편번호와 주소를 회원등록폼으로 셋팅하는
+		$(document).on('click',"#zipList>li",function(){
+			var zipcode = $(this).children(".zip").text();
+			var address = $(this).children(".addr").text();
+			
+			opener.document.getElementById("zipcode").value = zipcode;
+			opener.document.getElementById("addr").value = address;
+			
+			window.close();//팝업창 닫기 self.close();
+		});
 	})
 </script>
 </head>

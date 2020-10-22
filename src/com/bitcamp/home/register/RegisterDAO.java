@@ -7,16 +7,34 @@ import com.bitcamp.home.DBConnection;
 
 public class RegisterDAO extends DBConnection implements RegisterInterface {
 
-	@Override
-	public RegisterVO loginCheck(RegisterVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public int registerInsert(RegisterVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt=0;
+		try {
+			getConn();
+			String sql = "insert into register (no, userid, userpwd, username, gender, birth,"
+					+ " tel, email, zipcode, addr, addrdetail, regdate)"
+					+ " values(register_sq.nextval, ?,?,?,?,to_date(?,'YYYY-MM-DD'),?,?,?,?,?,sysdate)";
+			getPstmt(sql);
+			pstmt.setString(1, vo.getUserid());
+			pstmt.setString(2, vo.getUserpwd());
+			pstmt.setString(3, vo.getUsername());
+			pstmt.setString(4, vo.getGender());
+			pstmt.setString(5, vo.getBirth());
+			pstmt.setString(6, vo.getTel());
+			pstmt.setString(7, vo.getEmail());
+			pstmt.setString(8, vo.getZipcode());
+			pstmt.setString(9, vo.getAddr());
+			pstmt.setString(10, vo.getAddrDetail());
+			
+			cnt = pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("회원등록 에러 발생-->"+e.getMessage());
+		}finally {
+			getClose();
+		}
+		return cnt;
 	}
 
 	@Override
@@ -78,5 +96,28 @@ public class RegisterDAO extends DBConnection implements RegisterInterface {
 			getClose();
 		}
 		return list;
+	}
+
+	@Override
+	public void loginCheck(RegisterVO vo) {
+		try {
+			getConn();
+			String sql = "select username from register where userid=? and userpwd=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUserid());
+			pstmt.setString(2, vo.getUserpwd());
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				vo.setUsername(rs.getString(1));
+				vo.setLogStatus("Y");
+			}
+			
+		}catch(Exception e) {
+			System.out.println("로그인 에러발생->"+e.getMessage());
+		}finally {
+			getClose();
+		}
+		
 	}
 }

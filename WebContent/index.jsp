@@ -19,6 +19,5 @@
 			<img src="<%=request.getContextPath()%>/img/5.jpg"/>
 		</div>
 	</div>
-
 </body>
 </html>
