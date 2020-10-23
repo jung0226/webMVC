@@ -196,4 +196,22 @@ public class RegisterDAO extends DBConnection implements RegisterInterface {
 		
 		return result;
 	}
+	//회원 정보 삭제
+	public int registerDelete(String userid) {
+		int result=0;
+		try {
+			getConn();
+			String sql="delete from register where userid=?";
+			getPstmt(sql);
+			pstmt.setString(1, userid);
+			
+			result=pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("회원정보 삭제 에러 발생-> "+e.getMessage());
+		}finally {
+			getClose();
+		}
+		
+		return result;
+	}
 }

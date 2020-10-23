@@ -23,7 +23,7 @@
 	<c:if test="${logStatus=='Y' }">
 		${logName }님 <a href="<%=request.getContextPath()%>/logout.do">로그아웃</a>
 		<a href="<%=request.getContextPath()%>/register/regEditForm.do">회원정보수정</a>
-		회원탈퇴
+		<a href="<%=request.getContextPath()%>/register/regDeleteForm.do">회원탈퇴</a>
 	</c:if>
 	<a href="<%=request.getContextPath()%>/board/boardList.do">게시판</a>
 	
