@@ -76,6 +76,12 @@ public class RegisterVO {
 
 	public void setBirth(String birth) {
 		this.birth = birth;
+		
+		//년, 월, 일 분리 2020-11-30
+		String birthSplit[] = birth.split("-");
+		year=birthSplit[0];
+		month=birthSplit[1];
+		day=birthSplit[2];
 	}
 
 	public String getYear() {
@@ -109,6 +115,10 @@ public class RegisterVO {
 
 	public void setTel(String tel) {
 		this.tel = tel;
+		String telCut[]=tel.split("-");
+		tel1 = telCut[0];
+		tel2=telCut[1];
+		tel3=telCut[2];
 	}
 
 	public String getTel1() {
