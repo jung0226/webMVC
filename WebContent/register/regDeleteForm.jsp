@@ -25,15 +25,15 @@
 	<%@ include file ="../inc/top.jspf" %>
 	<div id="content">
 		<h1>회원탈퇴</h1>
-		<form method="post" id="regFrm" action="/webMVC/register/regDeleteFormOk.do">
-		<ul>
-			<li>회원탈퇴를 하시면 복구할 수 없습니다.</li>
-			<li>회원탈퇴를 하시겠습니까?</li>
-			<li></li>
-			<li>
-				<input type="submit" value="회원탈퇴하기"/>
-			</li>
-		</ul>
+		<form method="post" id="regDelFrm" action="/webMVC/register/regDeleteResult.do">
+			<ul>
+				<li>회원탈퇴를 하시면 복구할 수 없습니다.</li>
+				<li>회원탈퇴를 하시겠습니까?</li>
+				<li></li>
+				<li>
+					<input type="submit" value="회원정보탈퇴하기"/>
+				</li>
+			</ul>
 		</form>
 	</div>
 </div>

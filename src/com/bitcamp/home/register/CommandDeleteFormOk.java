@@ -14,16 +14,18 @@ public class CommandDeleteFormOk implements CommandService {
 	@Override
 	public String executeCommand(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		RegisterVO vo = new RegisterVO();
-		vo.setUserid(req.getParameter("userid"));
+		
 		//세션의 아이디 가져오기
 		RegisterDAO dao = RegisterDAO.getInstance();
 		
-		int result = dao.registerDelete(vo.getUserid());
+		HttpSession session = req.getSession();
+		String logId = (String)session.getAttribute("logId");
+		
+		int result = dao.registerDelete(logId);
 		if(result>0){
-			HttpSession session = req.getSession();
+			session = req.getSession();
 			session.invalidate();
-			return "/register/regDeleteResult.jsp";
+			return "/index.jsp";
 		}else {
 			return "/register/regDeleteForm.jsp";
 		}

@@ -18,7 +18,7 @@ public class DBConnection {
 	protected PreparedStatement pstmt =null;
 	protected ResultSet rs= null;
 	
-	String url = "jdbc:oracle:thin:@192.168.0.225:1521:xe";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String userid = "scott";
 	String userpwd="tiger";
 	
