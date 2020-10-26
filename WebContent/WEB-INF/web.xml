@@ -16,9 +16,9 @@
   	<init-param>
   		<param-name>proFileName</param-name>
   		<!-- 학원 -->
-  		<!-- <param-value>D:\workspaceWeb\webMVC\WebContent\WEB-INF\prop\urlMapping.properties</param-value> -->
+  		<param-value>D:\workspaceWeb\webMVC\WebContent\WEB-INF\prop\urlMapping.properties</param-value>
   		<!-- 집 -->
-  		<param-value>C:\Users\Jung\workspaceWeb\webMVC\WebContent\WEB-INF\prop\urlMapping.properties</param-value>
+  		<!-- <param-value>C:\Users\Jung\workspaceWeb\webMVC\WebContent\WEB-INF\prop\urlMapping.properties</param-value> -->
   	</init-param>
   </servlet>
   <servlet-mapping>

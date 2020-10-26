@@ -30,12 +30,25 @@ public class PagingVO {
 	}
 	public void setNowPage(int nowPage) {
 		this.nowPage = nowPage;
+		//시작 페이지 번호 계산
+		startPageNum=(nowPage-1)/onePageNumCount*onePageNumCount+1;	
+		
 	}
 	public int getTotalRecord() {
 		return totalRecord;
 	}
 	public void setTotalRecord(int totalRecord) {
 		this.totalRecord = totalRecord;
+		//총 페이지 수 구하기
+		totalPage = (int)Math.ceil((double)totalRecord/onePageRecord);
+		
+		//마지막 페이지에서 선택할 레코드 수 
+		if(nowPage==totalPage && totalRecord%onePageRecord!=0) {
+			lastPageRecordCount = totalRecord%onePageRecord;
+		}else {
+			lastPageRecordCount = onePageRecord;
+		}
+		
 	}
 	public int getTotalPage() {
 		return totalPage;

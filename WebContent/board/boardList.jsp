@@ -47,41 +47,67 @@
 		font-size:1.3em;
 	}
 </style>
+<script>
+	$(function(){
+		//검색어 폼에서 검색버튼 선택시
+		$('#searchFrm').submit(function(){
+			if($('#searchWord'.val()=="")){ //*-*-*-*-*-*-*-*-확인.*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+				return false;
+			}
+			return true;
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="container">
 		<h1>게시판</h1>
 		<div>총 레코드 수 : ${pageVO.totalRecord}개</div>
-		<div>pages : 55/99</div>
+		<div>pages : ${pageVO.nowPage}/${pageVO.totalPage }</div>
 		<ul id="lst">
 			<li>번호</li>
 			<li>제목</li>
 			<li>글쓴이</li>
 			<li>등록일</li>
 			<li>조회수</li>
-				<li>22</li>
-				<li class="wordCut"><a href="/webJSP/freeboard/boardView.jsp?no=22&nowPage=22">afd</a></li>
-				<li>asdf</li>
-				<li>2200.10.22</li>
-				<li>4</li>
+				<c:forEach var="vo" items="${list}">
+					<li>${vo.no }</li>
+					<li class="wordCut">
+						<!-- <a href="/webJSP/freeboard/boardView.jsp?no=${vo.no }&nowPage=${pageVO.nowPage}<c:if test="${pageVO.searchWord!=null }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${vo.subject }</a> -->
+						<a href="<%=request.getContextPath() %>/board/boardView.do?no=${vo.no }&nowPage=${pageVO.nowPage}<c:if test="${pageVO.searchWord!=null }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${vo.subject }</a>
+					</li>
+					<li>${vo.userid }</li>
+					<li>${vo.writedate }</li>
+					<li>${vo.hit }</li>
+				</c:forEach>
 		</ul>
 		<div id="paging">
 			<ul>
 				<!-- 이전 페이지 -->
 				<li>
-					Prev
+					<c:if test="${pageVO.nowPage>1 }">
+						<a href="<%=request.getContextPath()%>/board/boardList.do?nowPage=${pageVO.nowPage-1}<c:if test="${pageVO.searchWord!=null }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">Prev</a>
+					</c:if>
 				</li>
 				<!-- 페이지 넘버 매기기 -->
-				<li>1</li>
-				<li>2</li>
+				<!-- 							1						1+10-1 -->
+				<!-- 							11						11+10-1 -->
+				<c:forEach var="p" begin="${pageVO.startPageNum}" end="${pageVO.startPageNum + pageVO.onePageRecord-1}">
+					<c:if test="${p <= pageVO.totalPage }">				
+						<li	<c:if test="${p==pageVO.nowPage}"> style="background-color:lightblue" </c:if>>
+						<a href="/webMVC/board/boardList.do?nowPage=${p }<c:if test="${pageVO.searchWord!=null }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">${p}</a></li>						
+					</c:if>
+				</c:forEach>
 				<li>
-					Next
+					<c:if test="${pageVO.nowPage<pageVO.totalPage}">
+					<a href="<%=request.getContextPath()%>/board/boardList.do?nowPage=${pageVO.nowPage+1}<c:if test="${pageVO.searchWord!=null }">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord }</c:if>">Next</a>
+					</c:if>
 				</li>
 			</ul>
 		</div>
 		<!-- 검색기능 -->
 		<div>
-			<form method="get" action="/webMVC/board/boardList.do">
+			<form method="get" action="/webMVC/board/boardList.do" id="searchFrm">
 				<select name="searchKey" id="searchKey">
 							  <!-- DB의 필드명 -->
 					<option value="subject">제목</option>
@@ -94,6 +120,7 @@
 		</div>
 		<div>
 			<a href="<%=request.getContextPath()%>/index.do">홈</a>
+			<a href="/webMVC/board/boardList.do" >전체목록</a>
 			<a href="<%=request.getContextPath() %>/board/boardwrite.do">글쓰기</a>
 		</div>
 	</div>

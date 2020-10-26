@@ -6,7 +6,7 @@ public interface BoardInterface {
 	//글 선택
 	public void getSelected(BoardVO vo);
 	//총레코드수
-	public int getAllRecordCount();
+	public int getAllRecordCount(PagingVO pageVO);
 	//조회수 증가
 	public void hitCount(int no);
 	//글 수정
