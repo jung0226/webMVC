@@ -121,7 +121,9 @@
 		<div>
 			<a href="<%=request.getContextPath()%>/index.do">홈</a>
 			<a href="/webMVC/board/boardList.do" >전체목록</a>
-			<a href="<%=request.getContextPath() %>/board/boardwrite.do">글쓰기</a>
+			<c:if test="${logStatus!=null && logStatus=='Y' }">
+				<a href="<%=request.getContextPath() %>/board/boardWrite.do">글쓰기</a>
+			</c:if>
 		</div>
 	</div>
 </body>

@@ -79,14 +79,40 @@ public class BoardDAO extends DBConnection implements BoardInterface{
 
 	@Override
 	public int boardUpdate(BoardVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt=0;
+		try {
+			getConn();
+			String sql="update freeboard set subject=?, content=? where no=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getSubject());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getNo());
+			
+			cnt = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("게시판 글 수정 에러 발생-> "+e.getMessage());
+		}finally {
+			getClose();
+		}		
+		return cnt;
 	}
 
 	@Override
 	public int boardDelete(int no) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = 0;
+		try {
+			getConn();
+			String sql = "delete from freeboard where no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);			
+			cnt = pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("게시판 글 삭제 에러 발생-> "+e.getMessage());
+		}finally {
+			getClose();
+		}
+		return cnt;
 	}
 
 	@Override
@@ -132,8 +158,25 @@ public class BoardDAO extends DBConnection implements BoardInterface{
 
 	@Override
 	public int boardInsert(BoardVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			getConn();
+			String sql = "insert into freeboard(no, subject, content, userid, hit, writedate, ip) "
+					+ "values(a_sq.nextval, ?,?,?,0,sysdate,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getSubject());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getUserid());
+			pstmt.setString(4, vo.getIp());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("글 등록에러 발생-> "+e.getMessage());
+		}finally {
+			getClose();
+		}
+		return result;
 	}
 	
 }

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:if test="${pVO.searchWord!=null }">
+	<c:set var="paramData">&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord }</c:set>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +13,19 @@
 <link rel="stylesheet" href="/webMVC/library/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/webMVC/library/bootstrap.js"></script>
+<script>
+	function delCheck(){
+		if(confirm("글을 삭제하시겠습니까?")){
+			location.href="/webMVC/board/boardDelete.do?no=${vo.no}&nowPage=${pVO.nowPage}${paramData}";
+		}
+	}
 
+</script>
 </head>
 <body>
+<div class="container">
+<%@ include file="../inc/top.jspf" %>
+
 <h1>글내용보기</h1>
 <ul>
 	<li>번호</li>
@@ -31,8 +44,9 @@
 <a href="/webMVC/index.do">홈</a>
 <a href="/webMVC/board/boardList.do?nowPage=${pVO.nowPage }<c:if test="${pVO.searchWord!=null }">&searchKey=${pVO.searchKey }&searchWord=${pVO.searchWord }</c:if>">목록</a>
 <c:if test="${logStatus!=null && logStatus=='Y' && vo.userid == logId}">
-	<a href="">수정</a>
-	<a href="">삭제</a>
+	<a href="<%=request.getContextPath() %>/board/boardEdit.do?no=${vo.no}&nowPage=${pVO.nowPage}<c:if test="${pVO.searchWord!=null}">&searchKey=${pVO.searchKey}&searchWord=${pVO.searchWord}</c:if>">수정</a>
+	<a href="javascript:delCheck()">삭제</a>
 </c:if>
+</div>
 </body>
 </html>
