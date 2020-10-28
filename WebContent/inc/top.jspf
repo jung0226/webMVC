@@ -16,17 +16,16 @@
 	
 	<c:if test="${logStatus==null || logStatus!='Y' }">
 		<a href="<%=request.getContextPath()%>/login.do">로그인</a>
-		<a href="<%=request.getContextPath() %>/register/regFrom.do">회원가입</a>
+		<a href="<%=request.getContextPath() %>/register/regForm.do">회원가입</a>
 		아이디찾기
 		비밀번호 찾기
 	</c:if>
 	<c:if test="${logStatus=='Y' }">
 		${logName }님 <a href="<%=request.getContextPath()%>/logout.do">로그아웃</a>
 		<a href="<%=request.getContextPath()%>/register/regEditForm.do">회원정보수정</a>
-		<a href="<%=request.getContextPath()%>/register/regDeleteForm.do">회원탈퇴</a>
+		<a href="<%=request.getContextPath()%>/register/regLeaveForm.do">회원탈퇴</a>
 	</c:if>
 	<a href="<%=request.getContextPath()%>/board/boardList.do">게시판</a>
-	
-	자료실
+	<a href="<%=request.getContextPath()%>/data/dataList.do">자료실</a>
 	
 </div>

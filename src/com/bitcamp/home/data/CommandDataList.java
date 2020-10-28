@@ -1,4 +1,4 @@
-package com.bitcamp.home.register;
+package com.bitcamp.home.data;
 
 import java.io.IOException;
 
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bitcamp.home.CommandService;
 
-public class CommandDeleteForm implements CommandService {
+public class CommandDataList implements CommandService {
 
 	@Override
 	public String executeCommand(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-		return "/register/regDeleteForm.jsp";
+		return "/data/dataList.jsp";
 	}
 
 }

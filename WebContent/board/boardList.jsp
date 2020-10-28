@@ -61,6 +61,7 @@
 </head>
 <body>
 	<div class="container">
+	<%@ include file ="../inc/top.jspf" %>
 		<h1>게시판</h1>
 		<div>총 레코드 수 : ${pageVO.totalRecord}개</div>
 		<div>pages : ${pageVO.nowPage}/${pageVO.totalPage }</div>
