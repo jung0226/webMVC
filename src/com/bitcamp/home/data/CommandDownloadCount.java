@@ -1,7 +1,6 @@
 package com.bitcamp.home.data;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,18 +8,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bitcamp.home.CommandService;
 
-public class CommandDataList implements CommandService {
+public class CommandDownloadCount implements CommandService {
 
 	@Override
 	public String executeCommand(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
+		int no = Integer.parseInt(req.getParameter("no"));
+		
 		DataDAO dao = new DataDAO();
-		List<DataVO> list = dao.dataSelectAll();
+		//다운로드를 증가한 후 현재 다운로드 횟수를 구하여 리턴 받는다.
+		int count = dao.downloadCount(no);
 		
-		req.setAttribute("list", list);
+		req.setAttribute("count", count);
 		
-		
-		return "/data/dataList.jsp";
+		return "/data/downcount.jsp";
 	}
 
 }

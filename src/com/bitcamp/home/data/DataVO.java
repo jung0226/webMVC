@@ -7,6 +7,8 @@ public class DataVO {
 	private String userid;
 	private String filename1;
 	private String filename2;
+	private String filename[]= new String[2];
+	
 	private String writedate;
 	private int hit;
 	private int downcount;
@@ -48,7 +50,21 @@ public class DataVO {
 	}
 	public void setFilename2(String filename2) {
 		this.filename2 = filename2;
+	}	
+	
+	public String[] getFilename() {
+		filename[0]=filename1;
+		filename[1]=filename2;
+		
+		return filename;
 	}
+	public void setFilename(String[] filename) {
+		this.filename = filename;
+		
+		this.filename1 = filename[0];
+		this.filename2 = filename[1];
+	}
+	
 	public String getWritedate() {
 		return writedate;
 	}
