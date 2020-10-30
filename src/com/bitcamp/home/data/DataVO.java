@@ -9,6 +9,9 @@ public class DataVO {
 	private String filename2;
 	private String filename[]= new String[2];
 	
+	//삭제한 파일명
+	private String delfile[];
+	
 	private String writedate;
 	private int hit;
 	private int downcount;
@@ -64,6 +67,15 @@ public class DataVO {
 		this.filename1 = filename[0];
 		this.filename2 = filename[1];
 	}
+	
+	
+	public String[] getDelfile() {
+		return delfile;
+	}
+	public void setDelfile(String[] delfile) {
+		this.delfile = delfile;
+	}
+		
 	
 	public String getWritedate() {
 		return writedate;

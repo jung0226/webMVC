@@ -70,7 +70,7 @@
 				</li>  
 				<li>${vo.downcount }</li>
 				<li>${vo.writedate }</li>		
-			</c:forEach>
+			</c:forEach> 
 		</ul>	
 	</div>
 	<c:if test="${logStatus!=null && logStatus=='Y'}">

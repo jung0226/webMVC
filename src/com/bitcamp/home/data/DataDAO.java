@@ -86,5 +86,112 @@ public class DataDAO extends DBConn {
 		}		
 		return cnt;
 	}
+	//레코드
+	public void getSelect(DataVO vo) {
+		try {
+			dbConn();
+			sql="select no, userid, title, content, hit, downcount, "
+					+ "writedate, filename1, filename2 from data where no=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getNo());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setNo(rs.getInt(1));
+				vo.setUserid(rs.getString(2));
+				vo.setTitle(rs.getString(3));
+				vo.setContent(rs.getString(4));
+				vo.setHit(rs.getInt(5));
+				vo.setDowncount(rs.getInt(6));
+				vo.setWritedate(rs.getString(7));
+				vo.setFilename1(rs.getString(8));
+				vo.setFilename2(rs.getString(9));
+			}
+		}catch(Exception e) {
+			System.out.println("레코드 선택 에러 발생-> "+e.getMessage());
+		}finally {
+			dbClose();
+		}
+	}
+	//조회수 증가
+	public void hitCount(int no) {
+		try {
+			dbConn();
+			sql = "update data set hit=hit+1 where no="+no;
+			pstmt=con.prepareStatement(sql);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("조회수 증가 에러 발생 -> "+e.getMessage());
+		}finally {
+			dbClose();
+		}
+	}
+	//레코드 수정
+	public int dataUpdate(DataVO vo) {
+		int cnt=0;
+		try {
+			dbConn();
+			sql="update data set title=?, content=?, filename1=?, filename2=? "
+					+ "where no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getFilename1());
+			pstmt.setString(4, vo.getFilename2());
+			pstmt.setInt(5, vo.getNo());
+			
+			cnt = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("자료실 업데이트 에러 발생--> "+e.getMessage());
+		}finally {
+			dbClose();
+		}		
+		return cnt;
+	}
+	//데이터베이스의 파일명 선택
+	public String[] getFileName(int no) {
+		String filename[] = new String[2];
+		try {
+			dbConn();
+			sql = "select filename1, filename2 from data where no=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				filename[0]=rs.getString(1);
+				filename[1]=rs.getString(2);
+			}			
+		}catch(Exception e) {
+			System.out.println("파일명 선택에러 발생-> "+e.getMessage());
+		}finally {
+			dbClose();
+		}
+		return filename;
+	}
+	//레코드 삭제
+	public int dataDelete(DataVO vo) {
+		int cnt=0;
+		try {
+			//삭제한 파일명 보관
+			vo.setFilename(getFileName(vo.getNo()));
+			
+			dbConn();			
+			
+			sql = "delete from data where no=? and userid=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getNo());
+			pstmt.setString(2, vo.getUserid());
+			
+			cnt=pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("레코드 삭제 에러 발생-> "+e.getMessage());
+		}finally {
+			dbClose();
+		}
+		return cnt;
+	}
+
 	
 }
